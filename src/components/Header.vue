@@ -1,4 +1,5 @@
 <template>
+    <!-- 從 Bootstrap 網站取得 Nav Bar 宣告套用。還記得怎麼進去嗎？Bootstrap網站 -> Get Start -> 右上角版本選跟package.json內的相同 -> Components -> NavBar -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
