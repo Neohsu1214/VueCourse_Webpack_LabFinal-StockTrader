@@ -1,6 +1,8 @@
 <template>
     <div>
-        <app-stock v-for="(stock, idx) in stocks" :key="idx"></app-stock>
+        <!-- 將 每一筆 stock 都傳入 Stock Component 去呈現 -->
+        <!-- 注意：要傳進去的資料，務必要用 v-bind傳入，此處要傳入的有兩個 key 與 stock -->
+        <app-stock v-for="(stock, idx) in stocks" :key="idx" :stock="stock"></app-stock>        
     </div>
 </template>
 
