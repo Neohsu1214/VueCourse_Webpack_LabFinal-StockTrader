@@ -11,13 +11,18 @@
                     <input type="number"
                         class="form-control"
                         placeholder="Quantity"
-                        v-model="quantity">
+                        v-model="quantity"
+                        :class=" insufficientFunds ? 'danger' : '' "
+                        >
+                        <!-- 也可寫成 :class="{danger: insufficientFunds}" -->
                 </div>
                 <div class="pull-right">
                     <button class="btn btn-success" 
                         @click="buyStock"
-                        :disabled="(quantity <= 0) || !Number.isInteger(parseInt(this.quantity))">
-                        Buy
+                        :disabled=" disableBuyBtn "
+                        :title=" insufficientFunds ? '錢不夠啦！' : '' "
+                        >
+                        {{ disableBuyBtn ? 'Cannot Buy' : 'Buy' }}
                     </button>
                 </div>
 
@@ -32,6 +37,17 @@ export default {
     data: function() { // 也可寫成 data() {}
         return {
             quantity: 0
+        }
+    },
+    computed: {
+        funds: function() { // ES6下可簡寫為 funds() {}
+            return this.$store.getters.funds;
+        },
+        insufficientFunds: function() {
+            return this.quantity * this.stock.price > this.funds;
+        },
+        disableBuyBtn: function() {
+            return (this.quantity <= 0) || !Number.isInteger(parseInt(this.quantity)) || this.insufficientFunds ;
         }
     },
     methods: {
@@ -55,5 +71,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .danger {
+        border: 1px solid red;
+    }
 </style>
