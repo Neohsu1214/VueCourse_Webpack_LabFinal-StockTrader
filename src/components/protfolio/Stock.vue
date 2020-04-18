@@ -1,7 +1,7 @@
 <template>
     <div class="col-sm-6 col-md-4">
         <!-- Bootstrap.com -> Get Start -> 版本選 v3.3.7 -> Panel -->
-        <div class="panel panel-success">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 {{ stock.name }}
                 <small>(Price: {{ stock.price }} | Quantity {{ stock.quantity }})</small>
@@ -37,9 +37,9 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'sellStock'
-        ]),
+        ...mapActions({
+            placeSellOrder: 'sellStock' // 因為會與此 component 的 sellStock 衝突，所以要改名稱
+        }),
         sellStock: function() {
             const order = {
                 stockId: this.stock.id,
@@ -47,7 +47,8 @@ export default {
                 quantity: this.quantity
             };
             // 透過 actions輔助器 直接叫用 module portfolio 的 action function: sellStock
-            this.sellStock();
+            this.placeSellOrder(order); 
+            // 或不使用 mapActions 改直接呼叫 this.$store.dispatch('sellStock', order);
         }
     }
 }

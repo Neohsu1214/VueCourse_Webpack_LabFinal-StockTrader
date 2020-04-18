@@ -9,13 +9,14 @@ const state = {
 
 const mutations = {
     'BUY_STOCK'(state, {stockId, quantity, stockPrice}) { // 即 'BUY_STOCK': function(state, {stockId, quantity, stockPrice}) {}
+        quantity = parseInt(quantity);
         // 如何有效地在 js array 中找到所要的資料? 用 find( element => 條件成立 )
         // find 等於是『 foreach(element in elements) if 條件成立 return element; 』的意思，ES6支援寫成如此
         const record = state.stocks.find(element => element.id == stockId);
 
         if (record) {
             // 已經買過此檔股票：更新數量
-            record.quantity += quantity;
+            record.quantity += parseInt(quantity) ;
         } else {
             // 還沒買過此檔股票：新增一筆 stock 到 stocks 中
             let oneStock = {
@@ -28,6 +29,8 @@ const mutations = {
         state.funds -= stockPrice * quantity;
     },
     'SELL_STOCK'(state, {stockId, quantity, stockPrice}) {
+        quantity = parseInt(quantity);
+
         // 用find 找到指定的 stock
         const record = state.stocks.find(element => element.id == stockId);
 
@@ -38,7 +41,7 @@ const mutations = {
             state.funds += stockPrice * quantity;
         } else {
             // 已購股票數不夠賣：就出清啦！
-            state.stocks.splice(state.stock.indexOf(recoed), 1);
+            state.stocks.splice(state.stocks.indexOf(record), 1);
             // 有賣資金就會增加啦
             state.funds += stockPrice * record.quantity;
         }
