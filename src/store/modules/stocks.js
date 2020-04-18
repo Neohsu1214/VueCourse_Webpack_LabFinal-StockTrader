@@ -28,7 +28,8 @@ const mutations = {
 // 要非同步(從Server端拿資料)異動 Vuex state中的資料，就是要靠這個 actions 去觸發 mutations 啦！
 const actions = {
     buyStock: ({commit}, order) => {
-        commit();
+        // 此時要觸發 Vuex module stocks 的 BUY_STOCK mutation
+        commit('BUY_STOCK', order);
     },
     initStocks: ({commit}) => {
         // 模擬從 server 端拿到所有可購買的 stocks 資料

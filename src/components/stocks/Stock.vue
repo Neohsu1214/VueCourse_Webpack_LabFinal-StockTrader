@@ -46,6 +46,8 @@ export default {
                 quantity: this.quantity
             };
             console.log(order);
+            // 透過 dispatch 觸發 vuex module stocks 的 buyStock action 事件
+            this.$store.dispatch('buyStock', order);
             this.quantity = 0; // 重設購買數量
         }
     }
