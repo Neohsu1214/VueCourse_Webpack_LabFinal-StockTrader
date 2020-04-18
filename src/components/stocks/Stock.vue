@@ -14,7 +14,7 @@
                         v-model="quantity"
                         :class=" insufficientFunds ? 'danger' : '' "
                         >
-                        <!-- 也可寫成 :class="{danger: insufficientFunds}" -->
+                        <!-- 也可寫成 :class="{danger: insufficientFunds}" 可以方便給定多個 classes -->
                 </div>
                 <div class="pull-right">
                     <button class="btn btn-success" 
