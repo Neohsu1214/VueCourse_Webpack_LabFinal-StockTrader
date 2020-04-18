@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 // 加入 vue-route 的設定
 import { routes } from './routes.js'
+// 加入 Vuex 的資料
+import store from './store/store';
 
 Vue.use(VueRouter);
 
@@ -14,6 +16,7 @@ const router = new VueRouter({
 
 new Vue({
   el: '#app',
-  router: router, // 將 VueRouter物件加到 Vue instance 中。 ES6支援同名簡寫，此行可以減寫成 router
+  router, // 將 VueRouter物件加到 Vue instance 中。ES6 支援同名簡寫，router: router 可以簡寫 router
+  store, // 將 Vuex 物件加到 Vue instance 中，ES6 支援同名簡寫， store: store 可簡寫成 store
   render: h => h(App)
 })

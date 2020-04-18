@@ -10,6 +10,7 @@
 import Stock from './Stock.vue';
 
 export default {
+    /* 資料改用 Vuex 的，所以要用 computed 取得
     data: function() { // ES6 下可以簡寫成 data() {}
         return {
             stocks: [
@@ -19,10 +20,17 @@ export default {
                 {id: 4, name: 'Twitter', price: 8}
             ]
         }
-    }, 
+    }, */ 
+    computed: {
+        stocks: function() {
+            // 改用 Vuex 後，stocks 資料就變成要用 computed 透過 this.$store.getters 取得
+            return this.$store.getters.stocks;
+        }
+    },
     components: {
         appStock: Stock
-    }
+    },
+    
 }
 </script>
 
