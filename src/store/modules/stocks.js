@@ -1,5 +1,5 @@
 /**
- * 專門用來存放 Portfolio 中的 stocks 的 Vuex module
+ * 專門用來存放 Component Stocks.vue 中的 stocks 的 Vuex module
  */ 
 import stocks from "../../mock_data/stocks.js";
 
@@ -31,7 +31,7 @@ const actions = {
         commit();
     },
     initStocks: ({commit}) => {
-        // 模擬從 server 端拿到使用者之前已經儲存的 Portfolio stocks 資料
+        // 模擬從 server 端拿到所有可購買的 stocks 資料
         // 此 stocks 變數即 mock_data/stocks.js 中假造的遠端資料
         commit('SET_STOCKS', stocks); // 觸發 mutation 的事件來更新 Vuex 的 stocks 資料
     },
