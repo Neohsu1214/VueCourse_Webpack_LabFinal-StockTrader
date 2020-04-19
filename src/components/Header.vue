@@ -15,7 +15,8 @@
                 <router-link to="/stocks" tag="li" activeClass="active"><a>Stocks</a></router-link>
             </ul>
             <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
-            <ul class="nav navbar-nav navbar-right">   
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" @click="endDay">End Day</a></li>   
                 <li class="dropdown">
                     <a href="#" 
                         class="dropdown-toggle" 
@@ -35,10 +36,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     computed: {
         funds: function() { // ES6下可以寫成 funds() {}
             return this.$store.getters.funds;
+        }
+    },
+    methods: {
+        ...mapActions([
+            'randoamizeStocks' // 拿 store/module/stocks.js 中的 randoamizeStocks 來用
+        ]),
+        endDay: function() { // ES6可簡寫為 endDay()
+            // 非同步叫用遠端API更新 module stocks price資料
+            this.randoamizeStocks();
         }
     }
 };

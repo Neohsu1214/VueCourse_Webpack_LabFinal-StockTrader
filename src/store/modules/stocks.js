@@ -21,7 +21,10 @@ const mutations = {
         state.stocks = stocks;
     },
     'RND_STOCKS': function(state) { // 也可以寫成 ES6格式 ‘RUN_STOCKS’ (state) {}
-        // 將股價亂數一下
+        // 將股價小小亂數一下
+        state.stocks.forEach(stock => {
+            stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+        });
     }
 };
 
