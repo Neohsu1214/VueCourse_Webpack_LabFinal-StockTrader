@@ -8,6 +8,11 @@ import store from './store/store';
 
 Vue.use(VueRouter);
 
+// 建立 global filter 幫金額數字加上＄與千分位
+Vue.filter('currency', (value) => {
+  return '$' + value.toLocaleString(); // 原來要加上千分位只要叫用 toLocaleString 就好啦？！
+});
+
 // 設定 VueRouter 物件 
 const router = new VueRouter({
   mode: 'history',
