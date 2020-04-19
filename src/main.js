@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource';
+
 import App from './App.vue'
 // 加入 vue-route 的設定
 import { routes } from './routes.js'
@@ -7,6 +9,11 @@ import { routes } from './routes.js'
 import store from './store/store';
 
 Vue.use(VueRouter);
+Vue.use(VueResource); // 未來會改用 Axios取代掉
+
+// 先到 firebase 註冊一個可提供 REST API 的資料庫服務: vuejs-stock-trader-ad814
+// 建立一個 Vue參數 http.options.root 記下資料庫服務API的 root path
+Vue.http.options.root = 'https://vuejs-stock-trader-ad814.firebaseio.com/';
 
 // 建立 global filter 幫金額數字加上＄與千分位
 Vue.filter('currency', (value) => {
