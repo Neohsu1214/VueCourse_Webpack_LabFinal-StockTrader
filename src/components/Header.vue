@@ -30,8 +30,8 @@
                         aria-haspopup="true" 
                         aria-expanded="false">Save & Load<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Save Data</a></li>
-                        <li><a class="dropdown-item" href="#">Load Data</a></li>
+                        <li><a class="dropdown-item" href="#" @click="saveData">Save Data</a></li>
+                        <li><a class="dropdown-item" href="#" @click="loadData">Load Data</a></li>
                     </ul>
                 </li>
             </ul>
@@ -55,12 +55,25 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'randoamizeStocks' // 拿 store/module/stocks.js 中的 randoamizeStocks 來用
-        ]),
+        ...mapActions({
+            randoamizeStocks: 'randoamizeStocks', // hint: 定義在 store/module/stocks.js 中的 actions
+            fetchData: 'loadData' // hint: 定義在 store/firebase_actions.js
+        }),
         endDay: function() { // ES6可簡寫為 endDay()
             // 非同步叫用遠端API更新 module stocks price資料
-            this.randoamizeStocks();
+            this.randoamizeStocks(); // 此 randoamizeStocks 即為 mapActions 中引入的 randoamizeStocks
+        },
+        saveData: function() {
+            // 將 store 中的資料兜成一個變數後，送到 firebase上存起來
+            const data = {
+                funds: this.$store.getters.funds,
+                stockPortfolio: this.$store.getters.stockPortfolio,
+                stocks: this.$store.getters.stocks
+            };
+            this.$http.put('data.json', data);
+        },
+        loadData: function() {
+            this.fetchData();
         }
     }
 };

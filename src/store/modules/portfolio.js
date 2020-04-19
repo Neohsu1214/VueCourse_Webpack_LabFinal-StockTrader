@@ -46,6 +46,11 @@ const mutations = {
             state.funds += stockPrice * record.quantity;
         }
         
+    },
+    'SET_PORTFOLIO'(state, portfolio) {
+        // 新增 mutation 來處理 透過 vue-resource 從 firebase 取得的資料
+        state.funds = portfolio.funds;
+        state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : [] ;
     }
 };
 
