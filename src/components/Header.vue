@@ -17,7 +17,12 @@
             <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" @click="endDay">End Day</a></li>   
-                <li class="dropdown">
+                <!-- 透過 v-bind:class 來動態綁定class，做到列表的顯示或關閉 -->
+                <li 
+                    class="dropdown"
+                    :class="{open: isDropdownOpen}"
+                    @click="isDropdownOpen = !isDropdownOpen"
+                    >
                     <a href="#" 
                         class="dropdown-toggle" 
                         data-toggle="dropdown" 
@@ -39,6 +44,11 @@
 import { mapActions } from 'vuex';
 
 export default {
+    data: function() {
+        return {
+            isDropdownOpen: false
+        }
+    },
     computed: {
         funds: function() { // ES6下可以寫成 funds() {}
             return this.$store.getters.funds;
